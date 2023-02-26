@@ -1,6 +1,9 @@
 const formulario =  document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
 
+var inver = document.getElementById('inversion');
+var resul = document.getElementById('resultado');
+
 inputs.forEach((input) => {
     input.addEventListener('keyup', (e) => {
         console.log(e.target.value);
@@ -8,6 +11,6 @@ inputs.forEach((input) => {
 });
 
 formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('No se envió el formulario');
+    resul.value = parseInt(inver * 0.02);
+    console.log(resul.value);
 });
