@@ -1,0 +1,20 @@
+main{
+    background: #050131;
+    padding: 8%;
+    text-align: center;
+    color: #ffffff;
+    margin-top: auto;
+}
+
+main h1{
+    font-size: 30px;
+    animation: color-change 1s infinite;
+}
+
+@keyframes color-change {
+    0% { color: rgb(230, 27, 101); }
+    30% { color: rgb(72, 228, 163); }
+    60% { color: rgb(227, 229, 98); }
+    90% { color: rgb(229, 56, 134); }
+    100% { color: rgb(230, 27, 101); }
+}

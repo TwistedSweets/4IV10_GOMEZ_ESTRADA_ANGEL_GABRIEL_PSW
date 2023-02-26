@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../ico/Icon.ico">
     <link rel="stylesheet" href="../scss/custom.css">
     <link rel="stylesheet" href="../CSS/style-base.css">
-    <link rel="stylesheet" href="../CSS/style-index.css">
+    <link rel="stylesheet" href="../CSS/style-04_1.css">
     <title>Página principal | Tareas de PSW</title>
 </head>
 <body class="main-all">
@@ -62,14 +62,30 @@
     </head>
 
     <main>
-        <article>
-            <h1>¡Bienvenido a mi página principal!</h1> 
-            <p>Este sitio web es una página de tareas, en la cual se pueden encontrar diferentes tareas, como por ejemplo:</p>
-                <li>Calculadora de intereses</li>
-                <li>Registro de usuarios</li>
-                <li>Inicio de sesión</li>
-            <p>Aunque la pagina principal, osea esta; no tiene... <b>nada</b></p>
-        </article>
+        <h1>Ejercicio 1</h1>
+        <p>
+            Suponga que un individuo desea invertir su capital en un banco y
+            <br>
+            desea saber cuánto dinero ganará después de un mes si el banco paga a razón de 2% mensual. 
+        </p>
+        <form id="formulario">
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="inversion" placeholder="¿Cuánto quieres invertir?">
+                <span class="input-group-text">.00</span>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-secondary" type="submit">Terminar</button>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="inversion" placeholder="Dinero que ganara después de un meses">
+                <span class="input-group-text">.00</span>
+            </div>
+        </form>
     </main>
 
     <footer class="bg-primary text-center text-secondary">
@@ -80,6 +96,7 @@
         </div>
     </footer>
 
+    <script src="../JS/04_1.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
