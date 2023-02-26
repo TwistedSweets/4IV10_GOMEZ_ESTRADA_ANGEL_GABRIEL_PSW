@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Logirent";
+    src: url("../Fonts/Logirentdemo-Ea5y8.otf");
+}
+
+.main-all{
+    background-image: url("../images/Niko.png");
+    background-position: center top 30%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.Awesome_text{
+    font-style: bold;
+    font-size: 28px;
+}
+
+span{
+    font-family: "Logirent";
+    color: #E90064;
+    font-size: 28px;
+}
+
+@media screen and (min-width:992px) {
+    .dropdown:hover .dropdown-menu{
+        display: block;
+        margin-top: 0;
+    }
+    
+    .dropdown .dropdown-menu{
+        display: none;
+    }
+
+    .dropdown:hover .dropdown-toggle::after{
+        border-top: 0;
+        border-bottom: .3em solid;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .dropdown-toggle.show::after{
+        border-top: 0;
+        border-bottom: .3em solid;
+    }
+}
