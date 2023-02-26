@@ -1,0 +1,14 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Custom for Visual Studio
+*.cs     diff=csharp
+*.csproj merge=binary
+*.sln    merge=binary
+*.vb     diff=vb
+*.vbproj merge=binary
+*.vcxproj merge=binary
+*.vcxitems merge=binary
+*.filters merge=binary
+*.wdkextproj merge=binary
+*.wdkextproj.filters merge=binary
