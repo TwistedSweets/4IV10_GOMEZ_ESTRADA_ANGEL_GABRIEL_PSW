@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../scss/custom.css">
     <link rel="stylesheet" href="../CSS/style-base.css">
     <link rel="stylesheet" href="../CSS/style-04_1.css">
+    <script src="../JS/04_1.js"></script>
     <title>Problema 4, ejercicio 1 | Tareas de PSW</title>
 </head>
 <body class="main-all">
@@ -72,19 +73,19 @@
             desea saber cuánto dinero ganará después de un mes si el banco paga a razón de 2% mensual. 
         </p>
         <form id="formulario">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
                 <span class="input-group-text">$</span>
                 <input type="number" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
                 id="inversion" placeholder="¿Cuánto quieres invertir?">
                 <span class="input-group-text">.00</span>
             </div>
             <div class="col-12">
-                <button class="btn btn-secondary" type="submit">Terminar</button>
+                <button class="btn btn-secondary" type="submit" onclick="return formulario();">Terminar</button>
             </div>
             <br>
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
                 <span class="input-group-text">$</span>
-                <input type="number" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                <input type="number" step=".01" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
                 id="resultado" placeholder="Dinero que ganara después de un meses">
                 <span class="input-group-text">.00</span>
             </div>
@@ -99,7 +100,7 @@
         </div>
     </footer>
 
-    <script src="../JS/04_1.js"></script>
+    <!--<script src="../JS/04_1.js"></script>-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
