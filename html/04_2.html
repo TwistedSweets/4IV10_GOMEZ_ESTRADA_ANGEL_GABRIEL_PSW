@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../ico/Icon.ico">
     <link rel="stylesheet" href="../scss/custom.css">
     <link rel="stylesheet" href="../CSS/style-base.css">
-    <link rel="stylesheet" href="../CSS/style-index.css">
+    <link rel="stylesheet" href="../CSS/style-04_1.css">
     <title>Problema 4, ejercicio 2 | Tareas de PSW</title>
 </head>
 <body class="main-all">
@@ -65,14 +65,42 @@
     </head>
 
     <main>
-        <article>
-            <h1>¡Bienvenido a mi página principal!</h1> 
-            <p>Este sitio web es una página de tareas, en la cual se pueden encontrar diferentes tareas, como por ejemplo:</p>
-                <li>Calculadora de intereses</li>
-                <li>Registro de usuarios</li>
-                <li>Inicio de sesión</li>
-            <p>Aunque la pagina principal, osea esta; no tiene... <b>nada</b></p>
-        </article>
+        <h1>Ejercicio 2</h1>
+        <p>
+            Un vendedor recibe un sueldo base mas un 10% extra por comisión de sus ventas,
+            <br>
+            el vendedor desea saber cuánto dinero obtendrá por concepto de comisiones por las tres ventas que
+            <br>
+            realiza en el mes y el total que recibirá en el mes tomando en cuenta su sueldo base y comisiones.
+        </p>
+        <form id="formulario">
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                multiple id="ventas" placeholder="Escribe tus 3 ventas,separado">
+            </div>
+            <br>
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" step=".01" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="sueldo_base" placeholder="Escribe tu sueldo base">
+            </div>
+            <div class="col-12">
+                <button class="btn btn-secondary" type="submit" onclick="return formulario();">Terminar</button>
+            </div>
+            <br>
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" step=".01" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="comision" placeholder="Tu comisión">
+            </div>
+            <br>
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" step=".01" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="sueldo_total" placeholder="Tu sueldo total">
+            </div>
+        </form>
     </main>
 
     <footer class="bg-primary text-center text-secondary">
