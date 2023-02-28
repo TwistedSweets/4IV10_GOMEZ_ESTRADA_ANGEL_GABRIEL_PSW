@@ -1,0 +1,11 @@
+main{
+    background: #050131;
+    min-height: 57.4vh;
+}
+
+.content{
+    padding-top: 5.5%;
+    text-align: center;
+    color: #ffffff;
+    margin-top: auto;
+}

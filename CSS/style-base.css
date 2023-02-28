@@ -3,6 +3,12 @@
     src: url("../Fonts/Logirentdemo-Ea5y8.otf");
 }
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+} 
+
 .main-all{
     background-image: url("../images/Niko.png");
     background-position: center top 30%;
@@ -10,7 +16,7 @@
 }
 
 footer{
-    position: absolute;
+    margin-top: auto;
     bottom: 0;
     width: 100%;
 }
