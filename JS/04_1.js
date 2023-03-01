@@ -7,8 +7,17 @@ console.log(alfabeto), si sirve*/
 
 function formulario(){
     inversion = document.getElementById('inversion').value;
-    final = inversion * 0.02;
-    resultado = document.getElementById('resultado').value = final;
+    if(inversion > 10000){
+        console.log("fuck u, es muy alto")
+        document.getElementById('inversion').value = 0;
+        final = 0;
+        resultado = document.getElementById('resultado').value = 0;
+        alert("FUCK U LO PUSISTE MAL");
+    }
+    else{
+        final = inversion * 0.02;
+        resultado = document.getElementById('resultado').value = final;
+    }  
 
     return false;
 }

@@ -1,4 +1,4 @@
-//problema 3
+//problema 3, codigo hecho por el maestro
 function problem3(){
     const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
