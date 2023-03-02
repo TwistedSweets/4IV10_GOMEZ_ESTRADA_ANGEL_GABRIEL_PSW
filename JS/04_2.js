@@ -14,7 +14,7 @@ function formulario(){
     return false;
 }
 
-// Second answer
+/*// Second answer
 function secondF() {
     let salarioV = document.getElementById("pagoV").value;
     let lector = /\D/;
@@ -40,4 +40,4 @@ function secondF() {
   
   function secondV() {
     document.getElementById("pagoV").value = "";
-  }
+  }*/

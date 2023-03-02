@@ -13,7 +13,7 @@ function problem3(){
 
     var p3_min = '';
 
-    p3_words.forEach(function(word, i){
+/*  p3_words.forEach(function(word, i){
         var unic_words = [];
         var word_array = word.split('');
 
@@ -30,4 +30,4 @@ function problem3(){
     })
 
     document.querySelector('#p3-output').textContent = p3_min;
-}
+}*/}
