@@ -79,7 +79,7 @@
             <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
                 <span class="input-group-text">$</span>
                 <input type="number" min="0" max="10000" oninput="this.value = Math.abs(this.value)" class="form-control" aria-label="Amount (to the nearest dollar)" 
-                id="inversion" placeholder="¿Cuánto quieres invertir?">
+                id="inversion" placeholder="¿Cuánto quieres invertir?" onkeydown="no_punto(event)" onpaste="return false">
                 <span class="input-group-text">.00</span>
             </div>
             <div class="col-12">
@@ -88,8 +88,10 @@
             <br>
             <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
                 <span class="input-group-text">$</span>
-                <input type="number" step=".01" min="0" class="form-control" aria-label="Amount (to the nearest dollar)" 
-                id="resultado" placeholder="Dinero que ganara al mes">
+                <input type="number" disabled step=".01" min="0" 
+                class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="resultado" placeholder="Dinero que ganara al mes"
+                max="10000" onchange="this.value = Math.abs(this.value)">
             </div>
         </form>
     </main>
