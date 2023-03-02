@@ -26,3 +26,7 @@ main article h1{
     margin-left: auto;
     margin-right: auto;
 }
+
+table{
+    background: #0f0579;
+}

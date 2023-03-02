@@ -79,11 +79,29 @@
             </p>
         </article>
 
-        <table class="table text-white w-50 center">
+        <form id="formulario">
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" max="10000" oninput="this.value = Math.abs(this.value)" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="monto_inicial" placeholder="Préstamo inicial / Monto inicial" onkeydown="no_punto(event)" onpaste="return false">
+                <span class="input-group-text">.00</span>
+            </div>
+            <div class="container d-flex align-items-center justify-content-center">
+                <button class="btn btn-secondary" type="submit" onclick="return false">Terminar</button>
+            </div>
+            <!--<div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" disabled step=".01" min="0" 
+                class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="resultado" placeholder="Dinero que ganara al mes"
+                max="10000" onchange="this.value = Math.abs(this.value)">
+            </div>-->
+        </form>
+        <br>
+        <table class="table text-white w-50 center" id="table">
             <thead>
                 <tr class="table-secondary">
                     <th scope="col">Numero</th>
-                    <th scope="col">Fecha</th>
                     <th scope="col">Saldo</th>
                     <th scope="col">Pago</th>
                     <th scope="col">Principal</th>
@@ -92,23 +110,6 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
             </tbody>
         </table>
     </main>
@@ -121,6 +122,7 @@
         </div>
     </footer>
 
+    <script src="../JS/07.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
