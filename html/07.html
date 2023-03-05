@@ -75,7 +75,7 @@
                 <br>
                 sea,con limite y porcentaje de 30% anual por 3 años, y se calcula con deserciones
                 <br>
-                y limites y un desplegado de una "table" de inversión, interés y monto.
+                y limites y un desplegado de una "table" de inversión, interés y monto. Siendo un resumen de todo la tabla.
             </p>
         </article>
 
@@ -86,6 +86,11 @@
                 id="montoni" placeholder="Préstamo inicial / Monto inicial" onkeydown="no_punto(event)" onpaste="return false">
                 <span class="input-group-text">.00</span>
             </div>
+            <div class="input-group mb-3 w-25 container d-flex align-items-center justify-content-center">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" 
+                id="compuesto" placeholder="Monto compuesto" disabled step=".01" onchange="this.value = Math.abs(this.value)">
+            </div>
             <div class="container d-flex align-items-center justify-content-center">
                 <button class="btn btn-secondary" type="submit">Terminar</button>
             </div>
@@ -94,10 +99,9 @@
         <table class="table text-white w-50 center" id="table">
             <thead>
                 <tr class="table-secondary">
-                    <th scope="col">Numero</th>
-                    <th scope="col">Saldo</th>
+                    <th scope="col">Préstamo</th>
                     <th scope="col">Pago</th>
-                    <th scope="col">Principal</th>
+                    <th scope="col">Cuota</th>
                     <th scope="col">Interés</th>
                     <th scope="col">Saldo Final</th>
                 </tr>

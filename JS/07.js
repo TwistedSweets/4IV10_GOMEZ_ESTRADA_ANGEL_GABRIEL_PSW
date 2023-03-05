@@ -1,12 +1,11 @@
 const formulario = document.getElementById('formulario');
 var tableref = document.getElementById('table');
-var number = 1;
 
-function incrementarvalue (value)
+/*function incrementarvalue (value)
 {
     value = isNaN(value) ? 0 : value;
-    value++;
-}
+    value+= 1;
+}*/
 
 formulario.addEventListener('submit', function(e){
     e.preventDefault();
@@ -17,10 +16,13 @@ formulario.addEventListener('submit', function(e){
     }
     else{
         var inter_comp = montoni * 1.331;
-        var interes = inter_comp * 0.3;
-        console.log(inter_comp.toFixed(2))
-        console.log(interes);
+        var interes = montoni * 0.3;
+        var cuota = interes + montoni;
+        var monto = montoni / 12;
+        var restante = montoni - monto;
     }
+
+    document.getElementById('compuesto').value = inter_comp;
 
     var tablaref = document.getElementById('table');
 
@@ -28,24 +30,21 @@ formulario.addEventListener('submit', function(e){
 
     var newcell_1 = newrow.insertCell(0);
 
-    newcell_1.innerHTML = number;
-    incrementarvalue(number);
-    console.log(number);
+    newcell_1.innerHTML = restante.toFixed(2);
 
     var newcell_2 = newrow.insertCell(1);
-    newcell_2.innerHTML = montoni;
+    newcell_2.innerHTML = monto.toFixed(2);
 
     var newcell_2 = newrow.insertCell(2);
-    newcell_2.innerHTML = montoni;
+    newcell_2.innerHTML = cuota;
 
     var newcell_2 = newrow.insertCell(3);
-    newcell_2.innerHTML = montoni;
+    newcell_2.innerHTML = interes.toFixed(2);
 
     var newcell_2 = newrow.insertCell(4);
-    newcell_2.innerHTML = montoni;
+    f = montoni - cuota;
+    newcell_2.innerHTML = f.toFixed(2);
 
-    var newcell_2 = newrow.insertCell(5);
-    newcell_2.innerHTML = montoni;
 });
 
 function no_punto(event) { 
