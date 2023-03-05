@@ -1,44 +1,52 @@
 const formulario = document.getElementById('formulario');
-let tableref = document.getElementById('table');
+var tableref = document.getElementById('table');
+var number = 1;
 
-function calcular(e){
+function incrementarvalue (value)
+{
+    value = isNaN(value) ? 0 : value;
+    value++;
+}
+
+formulario.addEventListener('submit', function(e){
     e.preventDefault();
-    var monto_inicial = document.getElementById('monto_inicial').value;
-    if (monto_inicial > 100000){
-        alert("Numero muy alto, intenta con uno mas pequeño");
+
+    var montoni = document.getElementById('montoni').value;
+    if(montoni > 100000){
+        alert("Numero muy alto, intenta con uno más pequeño");
     }
     else{
-        var inter_comp = monto_inicial * 1.331; /* = ((1 + (0.3 / 3))^3), lo puse haci como numero porque de todos modos no cambiara ni el año ni el interes
-                                                ademas de que sacaba mal el resultado de esa operacion por alguna forma que desconozco xdxd :v*/
+        var inter_comp = montoni * 1.331;
         var interes = inter_comp * 0.3;
+        console.log(inter_comp.toFixed(2))
         console.log(interes);
     }
 
-    console.log(inter_comp.toFixed(2));
+    var tablaref = document.getElementById('table');
 
-    let transactionformdata = new FormData(formulario);
-    insertrowintable(transactionformdata);
+    var newrow = tablaref.insertRow(tableref.rows.length);
 
-    return false;
-}
+    var newcell_1 = newrow.insertCell(0);
 
-formulario.addEventListener('submit', calcular(e), e == false);
+    newcell_1.innerHTML = number;
+    incrementarvalue(number);
+    console.log(number);
 
-function insertrowintable(transactionformdata){
-    let tableref = document.getElementById('table');
+    var newcell_2 = newrow.insertCell(1);
+    newcell_2.innerHTML = montoni;
 
-    let newrow = tableref.insertRow(tableref.rows.length);
+    var newcell_2 = newrow.insertCell(2);
+    newcell_2.innerHTML = montoni;
 
-    let newcell = newrow.insertCell(0);
-    var number = 1;
-    newcell.textcontent = transactionformdata.get('monto_inicial');
-    if (typeof insertrowintable == 'function'){
-        number++;
-    }
-    else{
-        alert("WTF, COMO HICISTE ESO")
-    }
-}
+    var newcell_2 = newrow.insertCell(3);
+    newcell_2.innerHTML = montoni;
+
+    var newcell_2 = newrow.insertCell(4);
+    newcell_2.innerHTML = montoni;
+
+    var newcell_2 = newrow.insertCell(5);
+    newcell_2.innerHTML = montoni;
+});
 
 function no_punto(event) { 
     var e = event || window.event;
@@ -77,3 +85,5 @@ u = número de unidades de tiempo en que el dinero se invierte o se solicita en 
 
 15000 * (1 + 0.3/3)^3 = 19965
 */
+
+/*Si queremos modificar html podemos incrustar*/
