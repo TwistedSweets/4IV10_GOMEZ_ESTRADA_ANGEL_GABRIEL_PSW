@@ -29,5 +29,7 @@ formulario.addEventListener('submit', function(e){
 
         var JSONuser = JSON.stringify(user);    
         localStorage.setItem('user', JSONuser);
+
+        alert("Usuario registrado");
     }
 });
