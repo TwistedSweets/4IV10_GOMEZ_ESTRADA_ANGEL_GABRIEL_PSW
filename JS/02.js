@@ -1,3 +1,4 @@
+const formulario = document.getElementById('formulario');
 const x = document.getElementById("inputpassword");
 const y = document.getElementById("repeatpassword");
 
@@ -11,14 +12,22 @@ function showps(){
     }
 }
 
-function register(){
+formulario.addEventListener('submit', function(e){
+    e.preventDefault();
     if(x.value != y.value){
         alert("Contraseñas no coinciden");
         y.value = "";
     }
     else{
-        alert("Registro exitoso :D");
-    }
+        var user = {
+            name: document.getElementById('inputname').value,
+            apellpat: document.getElementById('inputfather').value,
+            apellmat: document.getElementById('inputmother').value,
+            user: document.getElementById('inputuser').value,
+            password: x.value,
+        };
 
-    return false;
-}
+        var JSONuser = JSON.stringify(user);    
+        localStorage.setItem('user', JSONuser);
+    }
+});

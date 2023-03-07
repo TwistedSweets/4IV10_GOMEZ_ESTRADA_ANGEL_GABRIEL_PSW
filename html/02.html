@@ -69,7 +69,7 @@
     </head>
 
     <main>
-        <h1>Registrate! (no funciona ni almacena esto xd)</h1>
+        <h1>Registrate!</h1>
         <form id="formulario">
             <div class=" row g-3 ontainer d-flex align-items-center justify-content-center">
                 <div class="col-auto w-25 ">
@@ -77,18 +77,18 @@
                     placeholder="Nombres(s)" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                     </div>
                 <div class="col-auto w-25 ">
-                <input type="text" id="inputmother" class="form-control" minlength="5" maxlength="15"
-                placeholder="Apellidos maternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                <input type="text" id="inputfather" class="form-control" minlength="5" maxlength="15"
+                placeholder="Apellidos paternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                 </div>
                 <div class="col-auto w-25">
-                    <input type="text" id="inputfather" class="form-control" minlength="5" maxlength="15"
-                    placeholder="Apellidos paternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                    <input type="text" id="inputmother" class="form-control" minlength="5" maxlength="15"
+                    placeholder="Apellidos maternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                 </div>
             </div>
             <br>
             <div class="g-3">
                 <div class="col-auto w-25 container d-flex align-items-center justify-content-center">
-                <input type="text" id="inputuser" class="form-control" minlength="26" maxlength="45"
+                <input type="text" id="inputuser" class="form-control" minlength="8" maxlength="25"
                 placeholder="Nombre de usuario" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
                 </div>
             </div>
@@ -121,7 +121,7 @@
             </div>
             <br>
             <div class="col-12">
-                <button class="btn btn-secondary" type="submit" onclick="return register();">Terminar</button>
+                <button class="btn btn-secondary" type="submit">Terminar</button>
             </div>
         </form>
     </main>

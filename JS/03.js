@@ -1,3 +1,4 @@
+const formulario = document.getElementById('formulario');
 const x = document.getElementById("inputpassword");
 const y = document.getElementById("inputuser");
 
@@ -9,12 +10,19 @@ function showps(){
     }
 }
 
-function register(){
-    if(x.value == "" | y.value == ""){
-        alert("Almenos intenta llenar los campos");
+formulario.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var username = document.getElementById('inputuser').value;
+    var password = x.value;
+
+    var user = localStorage.getItem('user');
+    var data = JSON.parse(user);
+
+    if(data.user == username && data.password == password){
+        alert("Bienvenido " + data.name);
     }
     else{
-        alert("Registro exitoso :D");
+        alert("Usuario o contraseña incorrectos");
     }
-    return false;
-}
+});
