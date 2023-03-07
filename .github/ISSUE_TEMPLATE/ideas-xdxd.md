@@ -2,8 +2,8 @@
 name: Ideas xdxd
 about: Sugiere ideas para mejorar esta tarea xdxd
 title: ''
-labels: ''
-assignees: ''
+labels: question
+assignees: TwistedSweets
 
 ---
 
