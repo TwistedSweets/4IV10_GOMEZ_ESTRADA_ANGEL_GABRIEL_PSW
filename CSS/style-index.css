@@ -4,10 +4,11 @@ main{
 }
 
 main article{
-    padding: 8%;
+    padding: 5%;
     text-align: center;
     color: #ffffff;
     margin-top: 10%;
+    margin-bottom: -30px;
 }
 
 main article h1{
@@ -21,4 +22,10 @@ main article h1{
     60% { color: rgb(227, 229, 98); }
     90% { color: rgb(229, 56, 134); }
     100% { color: rgb(230, 27, 101); }
+}
+
+.image{
+    padding: 0%;
+    padding-bottom: 5%;
+    margin-top: 0%;
 }
