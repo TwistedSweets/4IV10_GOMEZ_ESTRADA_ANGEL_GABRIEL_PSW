@@ -27,9 +27,15 @@ formulario.addEventListener('submit', function(e){
             password: x.value,
         };
 
-        var JSONuser = JSON.stringify(user);    
-        localStorage.setItem('user', JSONuser);
-
-        alert("Usuario registrado");
+        fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch(err => alert('Error: ' + err));
     }
 });

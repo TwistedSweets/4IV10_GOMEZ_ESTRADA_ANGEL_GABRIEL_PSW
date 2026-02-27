@@ -16,13 +16,14 @@ formulario.addEventListener('submit', function(e){
     var username = document.getElementById('inputuser').value;
     var password = x.value;
 
-    var user = localStorage.getItem('user');
-    var data = JSON.parse(user);
-
-    if(data.user == username && data.password == password){
-        alert("Bienvenido " + data.name);
-    }
-    else{
-        alert("Usuario o contraseña incorrectos");
-    }
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: username, password: password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    })
+    .catch(err => alert('Error: ' + err));
 });
