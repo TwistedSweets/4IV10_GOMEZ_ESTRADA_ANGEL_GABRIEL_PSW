@@ -24,10 +24,11 @@ formulario.addEventListener('submit', function(e){
             apellpat: document.getElementById('inputfather').value,
             apellmat: document.getElementById('inputmother').value,
             user: document.getElementById('inputuser').value,
+            email: document.getElementById('inputemail').value,
             password: x.value,
         };
 
-        fetch('http://localhost:3000/register', {
+        fetch('http://localhost:3006/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)

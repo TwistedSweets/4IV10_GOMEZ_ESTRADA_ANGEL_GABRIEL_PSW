@@ -1,0 +1,22 @@
+# Environment variables - NEVER push to GitHub
+.env
+
+# Node.js dependencies - Can recreate with npm install
+node_modules/
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Database files
+*.db
+*.sqlite

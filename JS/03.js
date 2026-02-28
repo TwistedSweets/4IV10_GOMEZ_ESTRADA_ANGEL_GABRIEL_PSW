@@ -16,7 +16,7 @@ formulario.addEventListener('submit', function(e){
     var username = document.getElementById('inputuser').value;
     var password = x.value;
 
-    fetch('http://localhost:3000/login', {
+    fetch('http://localhost:3006/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user: username, password: password })
