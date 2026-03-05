@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../ico/Icon.ico">
     <link rel="stylesheet" href="../scss/custom.css">
     <link rel="stylesheet" href="../CSS/style-base.css">
-    <link rel="stylesheet" href="../CSS/style-01.css">
-    <title>Curriculum | Tareas de PSW</title>
-</head>
+    <link rel="stylesheet" href="../CSS/style-04_1.css">
+    <link rel="stylesheet" href="../CSS/style-02.css">
+    <title>Profile | Tareas de PSW</title>
+    </head>
+</html>
 <body class="main-all">
     <header>
         <nav class="navbar bg-primary fixed-top navbar-expand-sm" data-bs-theme="dark">
@@ -26,10 +28,10 @@
                                 <a class="nav-link" href="../index.html">Página principal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="./01.html">Curriculum</a>
+                                <a class="nav-link" aria-current="page" href="./01.html">Curriculum</a>
                             </li>                            
                             <li class="nav-item">
-                                <a class="nav-link" href="./02.html">Registro</a>
+                                <a class="nav-link active" href="./02.html">Registro</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./03.html">Inicio de sesión</a>
@@ -72,45 +74,54 @@
             </div>
         </nav>
     </header>
-
+ 
     <main>
-        <article>
-            <h1>Curriculum</h1>
-        </article>
-
-        <article class="image">
-            <img class="image-border" src="../images/Twisted.png" alt="Twisted_Sweets" width="150" height="150" align="left">
-            <div class="con-name">
-                <h2>Angel Gabriel <br> Gomez Estrada</h2>
-                <h3>Estudiante</h3>
+        <h1>Modificar Perfil</h1>
+        <form id="formulario">
+            <div class=" row g-3 ontainer d-flex align-items-center justify-content-center">
+                <div class="col-auto w-25 ">
+                    <label for="inputname" class="form-label">Nombre</label>
+                    <input type="text" id="inputname" required class="form-control" minlength="5" maxlength="15"
+                    placeholder="Nombres(s)" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                </div>
+                <div class="col-auto w-25 ">
+                    <label for="inputapellpat" class="form-label">Apellido Paterno</label>
+                <input type="text" id="inputapellpat" required class="form-control" minlength="5" maxlength="15"
+                placeholder="Apellidos paternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                </div>
+                <div class="col-auto w-25 ">
+                    <label for="inputapellmat" class="form-label">Apellido Materno</label>
+                    <input type="text" id="inputapellmat" required class="form-control" minlength="5" maxlength="15"
+                    placeholder="Apellidos maternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                </div>
+                <div class="col-auto w-25 ">
+                    <label for="inputemail" class="form-label">Correo electrónico</label>
+                    <input type="email" id="inputemail" required class="form-control" minlength="8" maxlength="45"
+                    placeholder="Correo electrónico" onpaste="return false">
+                </div>
+            <div class="g-3">
+                <div class="col-auto w-25 container d-flex align-items-center justify-content-center">
+                <input type="password" id="inputpassword" class="form-control" minlength="8" maxlength="15"
+                aria-describedby="passwordHelpInline" placeholder="Contraseña" onpaste="return false"
+                onkeydown="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
+                </div>
+                <div class="col-auto">
+                <span class="form-text form-letter">
+                    Tiene que ser de 8 palabras mínimo y  palabras máximo
+                </span>
+                </div>
             </div>
-        </article>
-
-        <section>
-            <h2>Datos personales</h2>
-            <h3>Hobbies</h3>
-            <ul>
-                <li>Me gustan los videojuegos</li>
-                <li>Dibujo en Krita</li>
-                <li>Me gusta crear videojuegos</li>
-                <li>Me gusta usar FL Studio todo crackeado porque soy de LATAM XD</li>
-            </ul>
-
-            <h3>Estudios</h3>
-            <ul>
-                <li>Lic. Felipe Rivera</li>
-                <li>Numero 45. Maria Enriqueta Camarillo</li>
-                <li>CECyT 12</li>
-                <li>CECyT 9, a.k.a The Jail</li>
-            </ul>
-
-            <h3>Skills</h3>
-            <ul>
-                <li>Entender 2 idiomas ingles y ruso</li>
-                <li>Ser autodidacta en vacaciones xd</li>
-                <li>Aprendo rápido</li>
-            </ul>
-        </section>
+            <div class="g-3">
+                <div class="col-auto w-25 container d-flex align-items-center justify-content-center">
+                <input type="password" id="repeatpassword" class="form-control" minlength="8" maxlength="15"
+                aria-describedby="passwordHelpInline" placeholder="Repite la contraseña" onpaste="return false"
+                onkeydown="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-secondary" type="submit">Guardar cambios</button>
+            </div>
+        </form>
     </main>
 
     <footer class="bg-primary text-center text-secondary">
@@ -121,6 +132,5 @@
         </div>
     </footer>
 
+    <script src="../JS/Modify.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>

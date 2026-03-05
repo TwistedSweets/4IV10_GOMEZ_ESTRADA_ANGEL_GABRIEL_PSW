@@ -1,3 +1,8 @@
+//Si el usuario ya esta logueado, redirigir a profile
+if (localStorage.getItem('token')) {
+    window.location.href = './Profile.html';
+}
+
 const formulario = document.getElementById('formulario');
 const x = document.getElementById("inputpassword");
 const y = document.getElementById("inputuser");
@@ -23,7 +28,17 @@ formulario.addEventListener('submit', function(e){
     })
     .then(res => res.json())
     .then(data => {
-        alert(data.message);
+
+        console.log('Login response:', data);
+        //guardar token y usuario en localStorage
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.user);
+            alert(data.message);
+            window.location.href = './Profile.html';
+        } else {
+            alert(data.message);
+        }
     })
     .catch(err => alert('Error: ' + err));
 });

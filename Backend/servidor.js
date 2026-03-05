@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 //MySQL connection pool
 const pool = mysql.createPool({
@@ -16,6 +17,7 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+
 
 app.use(cors());
 app.use(express.json());
@@ -75,7 +77,7 @@ app.post('/login', async (req, res) => {
         
         if (!isPasswordValid) {
             connection.release();
-            return res.status(400).json({ message: 'Contraseña incorrecta' });
+         return res.status(400).json({ message: 'Contraseña incorrecta' });
         }
 
         //Generate JWT Token
@@ -94,17 +96,64 @@ app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
 });
 
-//Get all users from database
-app.get('/users', async (req, res) => {
+app.get('/profile', async (req, res) => {
     try {
+        const authHeader = req.headers['authorization'];
+        if (!authHeader) {
+            return res.status(401).json({ message: 'Token no proporcionado' });
+        }
+
+        const token = authHeader.split(' ')[1];
+
+        //Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const connection = await pool.getConnection();
+
         const [users] = await connection.query(
-            'SELECT id, user, email, created_at FROM usuarios'
-        );
+            'SELECT user, email, name, apellpat, apellmat, created_at FROM usuarios WHERE id = ?', [decoded.id]);
         connection.release();
-        res.json(users);
-    } catch (error) {
+
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+        res.json(users[0]);
+    }  catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error en el servidor' });
+     }
+});
+
+app.post('/modify', async (req, res) => {
+
+    const { name, apellpat, apellmat, email } = req.body;
+
+    try {
+
+        const authHeader = req.headers['authorization'];
+
+        if (!authHeader) {
+            return res.status(401).json({ message: 'Token no proporcionado' });
+        }
+
+        const token = authHeader.split(' ')[1];
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        const connection = await pool.getConnection();
+
+        await connection.query(
+            'UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?',
+            [name, apellpat, apellmat, email, decoded.id]
+        );
+
+        connection.release();
+
+        res.json({ message: 'Perfil actualizado exitosamente' });
+
+    } catch (error) {
+
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar perfil' });
+
     }
 });
