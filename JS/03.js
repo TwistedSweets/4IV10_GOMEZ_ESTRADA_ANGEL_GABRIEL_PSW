@@ -34,7 +34,6 @@ formulario.addEventListener('submit', function(e){
         if (data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', data.user);
-            alert(data.message);
             window.location.href = './Profile.html';
         } else {
             alert(data.message);

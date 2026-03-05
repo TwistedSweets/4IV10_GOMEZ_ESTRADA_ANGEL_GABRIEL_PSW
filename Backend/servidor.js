@@ -18,9 +18,49 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-
 app.use(cors());
 app.use(express.json());
+
+//Esto no es escalable xdxd mejor hago un middleWARE
+function verifyToken(req, res, next){
+
+    const authHeader = req.headers['authorization'];
+
+    if(!authHeader){
+        return res.status(401).json({ message: "Token requerido" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    if(!token){
+        return res.status(401).json({ message: "Token inválido" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+
+        if(err){
+            return res.status(403).json({ message: "Token inválido o expirado" });
+        }
+
+        req.user = decoded;
+        next();
+
+    });
+
+}
+
+module.exports = verifyToken;
+
+function checkAuth() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Debes iniciar sesión primero');
+        window.location.href = './03.html';
+        return false;
+    }
+    return true;
+}
 
 //Endpoint para registro
 app.post('/register', async (req, res) => {
@@ -96,64 +136,39 @@ app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
 });
 
-app.get('/profile', async (req, res) => {
+app.get('/profile', verifyToken, async (req, res) => {
     try {
-        const authHeader = req.headers['authorization'];
-        if (!authHeader) {
-            return res.status(401).json({ message: 'Token no proporcionado' });
-        }
-
-        const token = authHeader.split(' ')[1];
-
-        //Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const connection = await pool.getConnection();
 
-        const [users] = await connection.query(
-            'SELECT user, email, name, apellpat, apellmat, created_at FROM usuarios WHERE id = ?', [decoded.id]);
-        connection.release();
+        const [users] = await connection.query('SELECT id, name, apellpat, apellmat, user, email FROM usuarios WHERE id = ?', [req.user.id]);
 
+        connection.release();
         if (users.length === 0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
         res.json(users[0]);
-    }  catch (error) {
+    } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error en el servidor' });
-     }
+        res.status(500).json({ message: 'Error al obtener perfil' });
+    }
 });
 
-app.post('/modify', async (req, res) => {
+//pasamos de post to put porque es una actualización de datos, no una creación
+app.put('/modify', verifyToken, async (req, res) => {
 
     const { name, apellpat, apellmat, email } = req.body;
-
     try {
-
-        const authHeader = req.headers['authorization'];
-
-        if (!authHeader) {
-            return res.status(401).json({ message: 'Token no proporcionado' });
-        }
-
-        const token = authHeader.split(' ')[1];
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
         const connection = await pool.getConnection();
 
-        await connection.query(
-            'UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?',
-            [name, apellpat, apellmat, email, decoded.id]
-        );
+        await connection.query('UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?',
+            [name, apellpat, apellmat, email, req.user.id]);
 
         connection.release();
 
         res.json({ message: 'Perfil actualizado exitosamente' });
-
+        
     } catch (error) {
-
         console.error(error);
         res.status(500).json({ message: 'Error al actualizar perfil' });
-
     }
 });

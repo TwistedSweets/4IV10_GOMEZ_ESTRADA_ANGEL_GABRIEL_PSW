@@ -3,6 +3,8 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
     editProfile();
 });
 
+window.addEventListener('load', loadProfile);
+
 function editProfile() {
 
     const token = localStorage.getItem('token');
