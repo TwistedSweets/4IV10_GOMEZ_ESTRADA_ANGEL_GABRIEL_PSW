@@ -1,3 +1,4 @@
+const API_URL = 'http://localhost:3006';
 const formulario = document.getElementById('formulario');
 const x = document.getElementById("inputpassword");
 const y = document.getElementById("repeatpassword");
@@ -28,7 +29,7 @@ formulario.addEventListener('submit', function(e){
             password: x.value,
         };
 
-        fetch('http://localhost:3006/register', {
+        fetch(`${API_URL}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)

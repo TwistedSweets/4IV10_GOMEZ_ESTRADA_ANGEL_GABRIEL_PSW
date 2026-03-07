@@ -3,6 +3,7 @@ if (localStorage.getItem('token')) {
     window.location.href = './Profile.html';
 }
 
+const API_URL = 'http://localhost:3006';
 const formulario = document.getElementById('formulario');
 const x = document.getElementById("inputpassword");
 const y = document.getElementById("inputuser");
@@ -21,7 +22,7 @@ formulario.addEventListener('submit', function(e){
     var username = document.getElementById('inputuser').value;
     var password = x.value;
 
-    fetch('http://localhost:3006/login', {
+    fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user: username, password: password })

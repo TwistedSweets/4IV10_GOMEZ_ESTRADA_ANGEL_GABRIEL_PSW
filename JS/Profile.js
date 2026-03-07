@@ -1,6 +1,8 @@
 // When page loads, fetch user profile data
 window.addEventListener('load', loadProfile);
 
+const API_URL = 'http://localhost:3006';
+
 function loadProfile() {
     const token = localStorage.getItem('token');
     
@@ -12,7 +14,7 @@ function loadProfile() {
     }
 
     // Fetch user data from backend
-    fetch('http://localhost:3006/profile', {
+    fetch(`${API_URL}/profile`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

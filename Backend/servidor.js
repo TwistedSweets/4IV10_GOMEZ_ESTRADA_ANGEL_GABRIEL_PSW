@@ -1,6 +1,6 @@
+const { verifyToken } = require('./middleware');
 require('dotenv').config();
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql2/promise');
@@ -21,54 +21,13 @@ const pool = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
-//Esto no es escalable xdxd mejor hago un middleWARE
-function verifyToken(req, res, next){
-
-    const authHeader = req.headers['authorization'];
-
-    if(!authHeader){
-        return res.status(401).json({ message: "Token requerido" });
-    }
-
-    const token = authHeader.split(" ")[1];
-
-    if(!token){
-        return res.status(401).json({ message: "Token inválido" });
-    }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-
-        if(err){
-            return res.status(403).json({ message: "Token inválido o expirado" });
-        }
-
-        req.user = decoded;
-        next();
-
-    });
-
-}
-
-module.exports = verifyToken;
-
-function checkAuth() {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        alert('Debes iniciar sesión primero');
-        window.location.href = './03.html';
-        return false;
-    }
-    return true;
-}
-
 //Endpoint para registro
 app.post('/register', async (req, res) => {
     const { name, apellpat, apellmat, user, email, password } = req.body;
 
+    let connection;
     try {
-        //Get a connection from the pool
-        const connection = await pool.getConnection();
+        connection = await pool.getConnection();
 
         //Check if user already exists
         const [existingUsers] = await connection.query('SELECT * FROM usuarios WHERE user = ?', [user]);
@@ -83,11 +42,14 @@ app.post('/register', async (req, res) => {
         //Insert user in db
         await connection.query('INSERT INTO usuarios (name, apellpat, apellmat, user, email, password) VALUES (?, ?, ?, ?, ?, ?)',
             [name, apellpat, apellmat, user, email, hashedPassword]);
-        connection.release();
         res.json({ message: 'Usuario registrado exitosamente' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al registrar usuario' });
+    } finally {
+        if (connection) {
+            connection.release();
+        }
     }
 });
 
@@ -95,8 +57,9 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { user, password } = req.body;
 
+    let connection;
     try {
-        const connection = await pool.getConnection();
+        connection = await pool.getConnection();
 
         const [users] = await connection.query('SELECT * FROM usuarios WHERE user = ?', [user]);
 
@@ -108,12 +71,8 @@ app.post('/login', async (req, res) => {
         const dbUser = users[0];
         // Trim any whitespace from the hash
         dbUser.password = dbUser.password.trim();
-
-        console.log('Received password:', password);
-        console.log('Stored hash:', dbUser.password);
         
         const isPasswordValid = await bcrypt.compare(password, dbUser.password);
-        console.log('Password valid:', isPasswordValid);
         
         if (!isPasswordValid) {
             connection.release();
@@ -121,26 +80,26 @@ app.post('/login', async (req, res) => {
         }
 
         //Generate JWT Token
-        const token = require('jsonwebtoken').sign(
+        const token = jwt.sign(
             { id: dbUser.id, user: dbUser.user }, process.env.JWT_SECRET, { expiresIn: '24h' });
-        connection.release();
         res.json({ message: 'Inicio de sesión exitoso', token, user: dbUser.user });
-
         } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al iniciar sesión' });
-    }
-});
-
-app.listen(process.env.PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
 });
 
 app.get('/profile', verifyToken, async (req, res) => {
+    
+    let connection;
     try {
-        const connection = await pool.getConnection();
+        connection = await pool.getConnection();
 
-        const [users] = await connection.query('SELECT id, name, apellpat, apellmat, user, email FROM usuarios WHERE id = ?', [req.user.id]);
+        const [users] = await connection.query('SELECT id, name, apellpat, apellmat, user, email, created_at FROM usuarios WHERE id = ?', [req.user.id]);
 
         connection.release();
         if (users.length === 0) {
@@ -150,6 +109,10 @@ app.get('/profile', verifyToken, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al obtener perfil' });
+    } finally {
+        if (connection) {
+            connection.release();
+        }
     }
 });
 
@@ -157,18 +120,25 @@ app.get('/profile', verifyToken, async (req, res) => {
 app.put('/modify', verifyToken, async (req, res) => {
 
     const { name, apellpat, apellmat, email } = req.body;
+    let connection;
     try {
-        const connection = await pool.getConnection();
+        connection = await pool.getConnection();
 
         await connection.query('UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?',
             [name, apellpat, apellmat, email, req.user.id]);
-
-        connection.release();
 
         res.json({ message: 'Perfil actualizado exitosamente' });
         
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al actualizar perfil' });
+    } finally {
+        if (connection) {
+            connection.release();
+        }
     }
+});
+
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
 });

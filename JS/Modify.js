@@ -3,6 +3,8 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
     editProfile();
 });
 
+const API_URL = 'http://localhost:3006';
+
 window.addEventListener('load', loadProfile);
 
 function editProfile() {
@@ -20,8 +22,8 @@ function editProfile() {
     const apellmat = document.getElementById('inputapellmat').value;
     const email = document.getElementById('inputemail').value;
 
-    fetch('http://localhost:3006/modify', {
-        method: 'POST',
+    fetch(`${API_URL}/modify`, {
+        method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
