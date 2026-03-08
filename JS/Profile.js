@@ -5,49 +5,38 @@ const API_URL = 'http://localhost:3006';
 
 function loadProfile() {
     const token = localStorage.getItem('token');
-    
-    // Check if user is logged in
     if (!token) {
         alert('Debes iniciar sesión primero');
         window.location.href = './03.html';
         return;
     }
-
-    // Fetch user data from backend
     fetch(`${API_URL}/profile`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`
         }
     })
     .then(res => {
         if (!res.ok) {
-            throw new Error('Token inválido o expirado');
+            throw new Error('Error al obtener perfil');
         }
         return res.json();
     })
     .then(data => {
-        // Display user data
+        // Store profile data in sessionStorage
+        sessionStorage.setItem('profileData', JSON.stringify(data));
+        // Also update the DOM:
         document.getElementById('username').textContent = data.user;
         document.getElementById('email').textContent = data.email;
-        document.getElementById('fullname').textContent =
-        data.name + " " + data.apellpat + " " + data.apellmat;
-        
-        // Format date
+        document.getElementById('fullname').textContent = data.name + ' ' + data.apellpat + ' ' + data.apellmat;
         const date = new Date(data.created_at);
-        const formatted = date.toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+        document.getElementById('created').textContent = date.toLocaleDateString('es-ES', {
+            year: 'numeric', month: 'long', day: 'numeric'
         });
-        document.getElementById('created').textContent = formatted;
     })
     .catch(err => {
         alert('Error: ' + err.message);
-        // Redirect to login if token is invalid
-        localStorage.removeItem('token');
-        window.location.href = './03.html';
+        console.error(err);
     });
 }
 

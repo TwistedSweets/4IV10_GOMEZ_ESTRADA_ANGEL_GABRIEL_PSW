@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../CSS/style-02.css">
     <title>Profile | Tareas de PSW</title>
     </head>
-</html>
 <body class="main-all">
     <header>
         <nav class="navbar bg-primary fixed-top navbar-expand-sm" data-bs-theme="dark">
@@ -31,13 +30,13 @@
                                 <a class="nav-link" aria-current="page" href="./01.html">Curriculum</a>
                             </li>                            
                             <li class="nav-item">
-                                <a class="nav-link active" href="./02.html">Registro</a>
+                                <a class="nav-link" href="./02.html">Registro</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./03.html">Inicio de sesión</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./profile.html">Perfil</a>
+                                <a class="nav-link active" href="./profile.html">Perfil</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -82,32 +81,33 @@
                 <div class="col-auto w-25 ">
                     <label for="inputname" class="form-label">Nombre</label>
                     <input type="text" id="inputname" required class="form-control" minlength="5" maxlength="15"
-                    placeholder="Nombres(s)" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                    placeholder="Nombres(s)" onpaste="return false" oninput="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                 </div>
                 <div class="col-auto w-25 ">
                     <label for="inputapellpat" class="form-label">Apellido Paterno</label>
                 <input type="text" id="inputapellpat" required class="form-control" minlength="5" maxlength="15"
-                placeholder="Apellidos paternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                placeholder="Apellidos paternos" onpaste="return false" oninput="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                 </div>
                 <div class="col-auto w-25 ">
                     <label for="inputapellmat" class="form-label">Apellido Materno</label>
                     <input type="text" id="inputapellmat" required class="form-control" minlength="5" maxlength="15"
-                    placeholder="Apellidos maternos" onpaste="return false" onkeydown="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
+                    placeholder="Apellidos maternos" onpaste="return false" oninput="this.value=this.value.replace(/[^a-zA-Z .]/gi, '')">
                 </div>
                 <div class="col-auto w-25 ">
                     <label for="inputemail" class="form-label">Correo electrónico</label>
                     <input type="email" id="inputemail" required class="form-control" minlength="8" maxlength="45"
                     placeholder="Correo electrónico" onpaste="return false">
                 </div>
+            </div> 
             <div class="g-3">
                 <div class="col-auto w-25 container d-flex align-items-center justify-content-center">
                 <input type="password" id="inputpassword" class="form-control" minlength="8" maxlength="15"
                 aria-describedby="passwordHelpInline" placeholder="Contraseña" onpaste="return false"
-                onkeydown="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
+                oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
                 </div>
                 <div class="col-auto">
                 <span class="form-text form-letter">
-                    Tiene que ser de 8 palabras mínimo y  palabras máximo
+                    Tiene que ser de 8 caracteres mínimo y  15 caracteres máximo
                 </span>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 <div class="col-auto w-25 container d-flex align-items-center justify-content-center">
                 <input type="password" id="repeatpassword" class="form-control" minlength="8" maxlength="15"
                 aria-describedby="passwordHelpInline" placeholder="Repite la contraseña" onpaste="return false"
-                onkeydown="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
+                oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/gi, '')">
                 </div>
             </div>
             <div class="col-12">
@@ -134,3 +134,5 @@
 
     <script src="../JS/Modify.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

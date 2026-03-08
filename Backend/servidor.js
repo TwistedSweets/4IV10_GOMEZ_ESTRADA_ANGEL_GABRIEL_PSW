@@ -1,5 +1,5 @@
-const { verifyToken } = require('./middleware');
 require('dotenv').config();
+const { verifyToken } = require('./middleware');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -32,7 +32,6 @@ app.post('/register', async (req, res) => {
         //Check if user already exists
         const [existingUsers] = await connection.query('SELECT * FROM usuarios WHERE user = ?', [user]);
         if (existingUsers.length > 0) {
-            connection.release();
             return res.status(400).json({ message: 'Usuario ya existe' });
         }
 
@@ -64,7 +63,6 @@ app.post('/login', async (req, res) => {
         const [users] = await connection.query('SELECT * FROM usuarios WHERE user = ?', [user]);
 
         if (users.length === 0) {
-            connection.release();
             return res.status(400).json({ message: 'Usuario no encontrado' });
         }
 
@@ -75,7 +73,6 @@ app.post('/login', async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, dbUser.password);
         
         if (!isPasswordValid) {
-            connection.release();
          return res.status(400).json({ message: 'Contraseña incorrecta' });
         }
 
@@ -101,7 +98,6 @@ app.get('/profile', verifyToken, async (req, res) => {
 
         const [users] = await connection.query('SELECT id, name, apellpat, apellmat, user, email, created_at FROM usuarios WHERE id = ?', [req.user.id]);
 
-        connection.release();
         if (users.length === 0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
@@ -118,24 +114,29 @@ app.get('/profile', verifyToken, async (req, res) => {
 
 //pasamos de post to put porque es una actualización de datos, no una creación
 app.put('/modify', verifyToken, async (req, res) => {
+    const { name, apellpat, apellmat, email, password } = req.body;
 
-    const { name, apellpat, apellmat, email } = req.body;
     let connection;
     try {
+        // If password is provided, hash it and include in update, otherwise update without changing password
+        let query, params;
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            query = 'UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ?, password = ? WHERE id = ?';
+            params = [name, apellpat, apellmat, email, hashedPassword, req.user.id];
+        } else {
+            query = 'UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?';
+            params = [name, apellpat, apellmat, email, req.user.id];
+        }        
+
         connection = await pool.getConnection();
-
-        await connection.query('UPDATE usuarios SET name = ?, apellpat = ?, apellmat = ?, email = ? WHERE id = ?',
-            [name, apellpat, apellmat, email, req.user.id]);
-
+        await connection.query(query, params);
         res.json({ message: 'Perfil actualizado exitosamente' });
-        
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al actualizar perfil' });
     } finally {
-        if (connection) {
-            connection.release();
-        }
+        if (connection) connection.release();
     }
 });
 
